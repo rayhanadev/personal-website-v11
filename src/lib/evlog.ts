@@ -1,6 +1,7 @@
-import { env } from "@/env";
 import { createInstrumentation } from "evlog/next/instrumentation";
 import { createSentryDrain } from "evlog/sentry";
+
+import { env } from "@/env";
 
 export const { register, onRequestError } = createInstrumentation({
   service: "web",

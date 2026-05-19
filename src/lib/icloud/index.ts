@@ -8,8 +8,7 @@ import { env } from "@/env";
 const AUTH_ENDPOINT = "https://idmsa.apple.com/appleauth/auth";
 const HOME_ENDPOINT = "https://www.icloud.com";
 const SETUP_ENDPOINT = "https://setup.icloud.com/setup/ws/1";
-const WIDGET_KEY =
-  "d39ba9916b7251055b22c7f910e2ea796ee65e98b2ddecea8f5dde8d9d1a815d";
+const WIDGET_KEY = "d39ba9916b7251055b22c7f910e2ea796ee65e98b2ddecea8f5dde8d9d1a815d";
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3.1 Safari/605.1.15";
 const CLIENT_BUILD_NUMBER = "2534Project66";
@@ -152,16 +151,13 @@ class ICloudWebClient {
   private readonly sessionData: Partial<Record<SessionDataKey, string>>;
 
   constructor(private readonly config: FindMyConfig) {
-    this.clientId =
-      config.webSession?.data?.client_id ?? `auth-${randomUUID()}`;
+    this.clientId = config.webSession?.data?.client_id ?? `auth-${randomUUID()}`;
     this.sessionData = {
       ...config.webSession?.data,
       client_id: this.clientId,
     };
 
-    for (const [key, value] of Object.entries(
-      config.webSession?.cookies ?? {},
-    )) {
+    for (const [key, value] of Object.entries(config.webSession?.cookies ?? {})) {
       this.cookies.set(key, value);
     }
   }
@@ -171,9 +167,7 @@ class ICloudWebClient {
     const findmeUrl = account.webservices?.findme?.url;
 
     if (!findmeUrl) {
-      throw new Error(
-        "iCloud accountLogin did not return a Find My webservice URL.",
-      );
+      throw new Error("iCloud accountLogin did not return a Find My webservice URL.");
     }
 
     const init = await this.requestFindMyClient(findmeUrl);
@@ -194,22 +188,17 @@ class ICloudWebClient {
   }
 
   private async srpAuthenticate(): Promise<void> {
-    await this.requestJson(
-      "GET",
-      `${AUTH_ENDPOINT}/authorize/signin`,
-      undefined,
-      {
-        authVersion: "latest",
-        client_id: WIDGET_KEY,
-        frame_id: this.clientId,
-        iframeid: this.clientId,
-        redirect_uri: HOME_ENDPOINT,
-        response_mode: "web_message",
-        response_type: "code",
-        skVersion: "7",
-        state: this.clientId,
-      },
-    );
+    await this.requestJson("GET", `${AUTH_ENDPOINT}/authorize/signin`, undefined, {
+      authVersion: "latest",
+      client_id: WIDGET_KEY,
+      frame_id: this.clientId,
+      iframeid: this.clientId,
+      redirect_uri: HOME_ENDPOINT,
+      response_mode: "web_message",
+      response_type: "code",
+      skVersion: "7",
+      state: this.clientId,
+    });
 
     const proof = new AppleSrpProof(this.config.appleId, this.config.password);
     const init = await this.requestJson(
@@ -226,15 +215,10 @@ class ICloudWebClient {
 
     const challenge = SrpInitResponse.safeParse(init.json);
     if (!challenge.success) {
-      throw new Error(
-        "Apple SRP signin/init returned an unexpected response shape.",
-      );
+      throw new Error("Apple SRP signin/init returned an unexpected response shape.");
     }
 
-    const completeBody = proof.complete(
-      challenge.data,
-      this.sessionData.trust_token,
-    );
+    const completeBody = proof.complete(challenge.data, this.sessionData.trust_token);
     const complete = await this.requestJson(
       "POST",
       `${AUTH_ENDPOINT}/signin/complete`,
@@ -244,15 +228,11 @@ class ICloudWebClient {
     );
 
     if (complete.status === 409) {
-      throw new Error(
-        "Apple requires two-factor authentication for this iCloud web session.",
-      );
+      throw new Error("Apple requires two-factor authentication for this iCloud web session.");
     }
 
     if (!this.sessionData.session_token) {
-      throw new Error(
-        "Apple signin completed without returning a web session token.",
-      );
+      throw new Error("Apple signin completed without returning a web session token.");
     }
   }
 
@@ -261,22 +241,16 @@ class ICloudWebClient {
       throw new Error("Missing iCloud web session token.");
     }
 
-    const response = await this.requestJson(
-      "POST",
-      `${SETUP_ENDPOINT}/accountLogin`,
-      {
-        accountCountryCode: this.sessionData.account_country,
-        dsWebAuthToken: this.sessionData.session_token,
-        extended_login: true,
-        trustToken: this.sessionData.trust_token ?? "",
-      },
-    );
+    const response = await this.requestJson("POST", `${SETUP_ENDPOINT}/accountLogin`, {
+      accountCountryCode: this.sessionData.account_country,
+      dsWebAuthToken: this.sessionData.session_token,
+      extended_login: true,
+      trustToken: this.sessionData.trust_token ?? "",
+    });
 
     const parsed = AccountLoginResponse.safeParse(response.json);
     if (!parsed.success) {
-      throw new Error(
-        "iCloud accountLogin returned an unexpected response shape.",
-      );
+      throw new Error("iCloud accountLogin returned an unexpected response shape.");
     }
 
     const dsid = parsed.data.dsInfo?.dsid;
@@ -310,12 +284,7 @@ class ICloudWebClient {
       ...(isRefresh ? { isUpdatingAllLocations: true, serverContext } : {}),
     };
 
-    const response = await this.requestJson(
-      "POST",
-      url,
-      body,
-      this.requestParams(),
-    );
+    const response = await this.requestJson("POST", url, body, this.requestParams());
     const parsed = FindMyClientResponse.safeParse(response.json);
     if (!parsed.success) {
       throw new Error("Apple Find My returned an unexpected response shape.");
@@ -336,8 +305,7 @@ class ICloudWebClient {
 
     if (response.status >= 400 && response.status !== 409) {
       throw new Error(
-        errorMessageFromJson(json) ??
-          `Apple iCloud request failed with HTTP ${response.status}.`,
+        errorMessageFromJson(json) ?? `Apple iCloud request failed with HTTP ${response.status}.`,
       );
     }
 
@@ -390,9 +358,7 @@ class ICloudWebClient {
         (res) => {
           const chunks: Buffer[] = [];
 
-          this.updateSessionData(
-            res.headers as Record<string, string | string[] | undefined>,
-          );
+          this.updateSessionData(res.headers as Record<string, string | string[] | undefined>);
           this.updateCookies(res.headers["set-cookie"]);
 
           res.on("data", (chunk: Buffer) => {
@@ -410,9 +376,7 @@ class ICloudWebClient {
 
       req.on("error", reject);
       req.on("timeout", () => {
-        req.destroy(
-          new Error(`Apple iCloud request timed out for ${url.hostname}.`),
-        );
+        req.destroy(new Error(`Apple iCloud request timed out for ${url.hostname}.`));
       });
       req.end(payload);
     });
@@ -470,9 +434,7 @@ class ICloudWebClient {
     return params;
   }
 
-  private updateSessionData(
-    headers: Record<string, string | string[] | undefined>,
-  ): void {
+  private updateSessionData(headers: Record<string, string | string[] | undefined>): void {
     const headerMap: Record<string, SessionDataKey> = {
       "x-apple-auth-attributes": "auth_attributes",
       "x-apple-id-account-country": "account_country",
@@ -492,11 +454,7 @@ class ICloudWebClient {
   }
 
   private updateCookies(setCookie: string | string[] | undefined): void {
-    const cookies = Array.isArray(setCookie)
-      ? setCookie
-      : setCookie
-        ? [setCookie]
-        : [];
+    const cookies = Array.isArray(setCookie) ? setCookie : setCookie ? [setCookie] : [];
 
     for (const cookie of cookies) {
       const [pair] = cookie.split(";");
@@ -514,9 +472,7 @@ class ICloudWebClient {
       return undefined;
     }
 
-    return [...this.cookies.entries()]
-      .map(([key, value]) => `${key}=${value}`)
-      .join("; ");
+    return [...this.cookies.entries()].map(([key, value]) => `${key}=${value}`).join("; ");
   }
 }
 
@@ -526,9 +482,7 @@ export async function fetchCurrentIPhoneLocation(): Promise<LocationMetadata> {
     config = getFindMyConfig();
   } catch (error) {
     return failure(
-      error instanceof Error
-        ? error.message
-        : "Unable to parse iCloud configuration.",
+      error instanceof Error ? error.message : "Unable to parse iCloud configuration.",
     );
   }
 
@@ -547,9 +501,7 @@ export async function fetchCurrentIPhoneLocation(): Promise<LocationMetadata> {
 
     const location = normalizeLocation(device.location);
     if (!location) {
-      return failure(
-        "The matching iCloud device did not include a usable location.",
-      );
+      return failure("The matching iCloud device did not include a usable location.");
     }
 
     return {
@@ -561,11 +513,7 @@ export async function fetchCurrentIPhoneLocation(): Promise<LocationMetadata> {
       },
     };
   } catch (error) {
-    return failure(
-      error instanceof Error
-        ? error.message
-        : "Unable to fetch iCloud location.",
-    );
+    return failure(error instanceof Error ? error.message : "Unable to fetch iCloud location.");
   }
 }
 
@@ -585,9 +533,7 @@ function getFindMyConfig(): FindMyConfig | null {
   };
 }
 
-function parseWebSession(
-  rawSession: string | undefined,
-): ICloudWebSession | undefined {
+function parseWebSession(rawSession: string | undefined): ICloudWebSession | undefined {
   const raw = nonEmpty(rawSession);
   if (!raw) {
     return undefined;
@@ -616,34 +562,19 @@ class AppleSrpProof {
     this.aPublic = AppleSrpProof.bigIntToBuffer(this.publicKey);
   }
 
-  complete(
-    challenge: z.infer<typeof SrpInitResponse>,
-    trustToken: string | undefined,
-  ) {
+  complete(challenge: z.infer<typeof SrpInitResponse>, trustToken: string | undefined) {
     const salt = Buffer.from(challenge.salt, "base64");
-    const serverPublicKey = AppleSrpProof.bufferToBigInt(
-      Buffer.from(challenge.b, "base64"),
-    );
-    const multiplier = AppleSrpProof.bufferToBigInt(
-      AppleSrpProof.hashPadded(SRP_N, SRP_G),
-    );
+    const serverPublicKey = AppleSrpProof.bufferToBigInt(Buffer.from(challenge.b, "base64"));
+    const multiplier = AppleSrpProof.bufferToBigInt(AppleSrpProof.hashPadded(SRP_N, SRP_G));
     const scramblingParameter = AppleSrpProof.bufferToBigInt(
       AppleSrpProof.hashPadded(this.publicKey, serverPublicKey),
     );
-    const passwordDigest = createHash("sha256")
-      .update(this.password, "utf8")
-      .digest();
+    const passwordDigest = createHash("sha256").update(this.password, "utf8").digest();
     const pbkdfInput =
       challenge.protocol === "s2k_fo"
         ? Buffer.from(passwordDigest.toString("hex"))
         : passwordDigest;
-    const encodedPassword = pbkdf2Sync(
-      pbkdfInput,
-      salt,
-      challenge.iteration,
-      32,
-      "sha256",
-    );
+    const encodedPassword = pbkdf2Sync(pbkdfInput, salt, challenge.iteration, 32, "sha256");
     const privateKey = AppleSrpProof.bufferToBigInt(
       AppleSrpProof.hash(
         salt,
@@ -660,9 +591,7 @@ class AppleSrpProof {
       this.privateKey + scramblingParameter * privateKey,
       SRP_N,
     );
-    const sessionKey = AppleSrpProof.hash(
-      AppleSrpProof.bigIntToBuffer(sharedSecret),
-    );
+    const sessionKey = AppleSrpProof.hash(AppleSrpProof.bigIntToBuffer(sharedSecret));
     const clientProof = AppleSrpProof.hash(
       AppleSrpProof.hNxorg(),
       AppleSrpProof.hash(Buffer.from(this.appleId)),
@@ -711,11 +640,7 @@ class AppleSrpProof {
     return Buffer.from(hashN.map((byte, index) => byte ^ hashG[index]));
   }
 
-  private static modPow(
-    base: bigint,
-    exponent: bigint,
-    modulus: bigint,
-  ): bigint {
+  private static modPow(base: bigint, exponent: bigint, modulus: bigint): bigint {
     if (modulus === BigInt(1)) {
       return BigInt(0);
     }
@@ -775,9 +700,7 @@ function parseAppleJson(text: string, context: string): unknown {
   try {
     return JSON.parse(text);
   } catch {
-    throw new Error(
-      `Apple iCloud returned non-JSON data for ${new URL(context).pathname}.`,
-    );
+    throw new Error(`Apple iCloud returned non-JSON data for ${new URL(context).pathname}.`);
   }
 }
 
@@ -797,10 +720,7 @@ function errorMessageFromJson(json: unknown): string | undefined {
   return undefined;
 }
 
-function selectDevice(
-  devices: RawFindMyDevice[],
-  config: FindMyConfig,
-): RawFindMyDevice | null {
+function selectDevice(devices: RawFindMyDevice[], config: FindMyConfig): RawFindMyDevice | null {
   if (config.deviceName) {
     const targetName = config.deviceName.toLowerCase();
     const namedDevice = devices.find((device) =>
@@ -814,14 +734,10 @@ function selectDevice(
     }
   }
 
-  const locatedDevices = devices.filter((device) =>
-    isUsableLocation(device.location),
-  );
+  const locatedDevices = devices.filter((device) => isUsableLocation(device.location));
   const iPhones = locatedDevices.filter(isIPhone);
 
-  return (
-    newestDevice(iPhones) ?? newestDevice(locatedDevices) ?? devices[0] ?? null
-  );
+  return newestDevice(iPhones) ?? newestDevice(locatedDevices) ?? devices[0] ?? null;
 }
 
 function isIPhone(device: RawFindMyDevice): boolean {
@@ -859,11 +775,7 @@ function normalizeDevice(device: RawFindMyDevice): LocationData["device"] {
     displayName: device.deviceDisplayName ?? null,
     id: device.id,
     modelDisplayName: device.modelDisplayName ?? null,
-    name:
-      device.name ??
-      device.deviceDisplayName ??
-      device.modelDisplayName ??
-      "iPhone",
+    name: device.name ?? device.deviceDisplayName ?? device.modelDisplayName ?? "iPhone",
     rawDeviceModel: device.rawDeviceModel ?? null,
   };
 }
@@ -871,11 +783,7 @@ function normalizeDevice(device: RawFindMyDevice): LocationData["device"] {
 function isUsableLocation(
   location: RawFindMyLocation | null | undefined,
 ): location is RawFindMyLocation {
-  return (
-    !!location &&
-    Number.isFinite(location.latitude) &&
-    Number.isFinite(location.longitude)
-  );
+  return !!location && Number.isFinite(location.latitude) && Number.isFinite(location.longitude);
 }
 
 function normalizeLocation(
@@ -900,9 +808,7 @@ function normalizeLocation(
   };
 }
 
-function parseAppleDate(
-  timestamp: number | string | null | undefined,
-): Date | null {
+function parseAppleDate(timestamp: number | string | null | undefined): Date | null {
   if (timestamp == null) {
     return null;
   }
