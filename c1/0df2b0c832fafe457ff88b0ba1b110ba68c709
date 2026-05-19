@@ -1,0 +1,252 @@
+src/components/mdx/Anchor.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-22
+src/components/BlogFancybox.tsx
+  s_51ddad70931461::t_3285f01234e9f9 1-37
+src/components/mdx/H2.tsx
+  s_51ddad70931461::t_0435e929a97d11 5-6
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 11
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-10,12-15
+src/components/mdx/H5.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-19
+  s_51ddad70931461::t_0435e929a97d11 5-6
+src/components/mdx/ListItem.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/components/mdx/Figure.tsx
+  s_0f5b5e747d8b6b::t_7cb27d77314f03 29
+  s_51ddad70931461::t_3285f01234e9f9 7,13,31-37
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 28
+  s_51ddad70931461::t_f61a480ce50975 1-6,8-12,14-27,30,38-49
+src/app/layout.tsx
+  s_37f127e2a359e2::t_cb14ef527ec70b 1-2,5-6,12,14-25,28-30
+  s_d5fe1a9e23a868::t_3060c83586a203 33-40,42-48,50,55,59-73
+  s_0f5b5e747d8b6b::t_c27dc4cb895c32 90
+  s_51ddad70931461::t_b4726b9a7e7f52 7-8,49,51-54,56-58,74
+  s_51ddad70931461::t_3285f01234e9f9 9
+  s_0f5b5e747d8b6b::t_ff0298baede0c3 4,77-79,92-102
+src/components/mdx/OrderedList.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+src/components/mdx/TableRow.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+src/components/mdx/CodeBlock.tsx
+  s_51ddad70931461::t_4bb8487fd20221 33-37
+  s_51ddad70931461::t_5118ad1dcfe9c6 1-2,5-7,32,38-72,74-79,81-90
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 73
+  s_51ddad70931461::t_d9c540b54f7ac1 3
+  s_51ddad70931461::t_836defd9eb35fd 4
+  s_51ddad70931461::t_a1c15c8c3dd466 8-31
+src/app/mailing/confirm/page.tsx
+  s_ff607717dcb263::t_0798beb806d900 12
+  s_0f5b5e747d8b6b::t_cae257265d2569 5-9
+  s_ff607717dcb263::t_a4b7eb7385f7a3 1-4,10-11,13,16-24
+src/app/globals.css
+  s_37f127e2a359e2::t_9c9510ed3b47ee 11-13,63-64
+  s_51ddad70931461::t_3285f01234e9f9 70-90,94
+  s_37f127e2a359e2::t_cb14ef527ec70b 5,7
+  s_37f127e2a359e2::t_6a7a40a1105c87 15-16,36-38,40-41,68-69
+  s_37f127e2a359e2::t_c86e5c650ba1fa 14,19-20,25-26,45-46,51
+  s_0f5b5e747d8b6b::t_afbdd1ba6fc3d8 27-32,55-57,59
+  s_51ddad70931461::t_dc18be461b61d3 93
+src/components/mdx/Pre.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/app/mailing/confirm/layout.tsx
+  s_d5fe1a9e23a868::t_3060c83586a203 1-18
+src/components/Kaomoji.tsx
+  s_37f127e2a359e2::t_9c9510ed3b47ee 3,6
+  s_37f127e2a359e2::t_6a7a40a1105c87 1-2,9-12
+  s_37f127e2a359e2::t_68f5d2a1c9d4fa 8
+src/components/mdx/Div.tsx
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 28
+  s_51ddad70931461::t_f61a480ce50975 1-27,29-43
+src/app/blog/[slug]/page.tsx
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 29,33-35,66-67
+  s_0f5b5e747d8b6b::t_7cb27d77314f03 56
+  s_0f5b5e747d8b6b::t_b7f46ace2e6696 11
+  s_51ddad70931461::t_3285f01234e9f9 3,57-59
+  s_0f5b5e747d8b6b::t_8c9bd56dc271b9 8-10,12-28,30,44,50,86
+  s_37f127e2a359e2::t_a0e0ed80b4dd42 36,40,53-54,62,73,85
+  s_0f5b5e747d8b6b::t_7f2271c0077d92 75-84
+  s_37f127e2a359e2::t_d6047c28c490c4 6
+src/components/mdx/HorizontalRule.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+src/app/api/subscribe/route.ts
+  s_0f5b5e747d8b6b::t_c7f822a9b3bf4c 26-82
+src/content/reverse-engineering-yc.mdx
+  s_51ddad70931461::t_a387a44248165e 7-271
+src/components/mdx/InlineCode.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-19
+src/actions/subscribe.tsx
+  s_0f5b5e747d8b6b::t_efda528016a15e 9-58
+src/components/mdx/H4.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-19
+  s_51ddad70931461::t_0435e929a97d11 5-6
+src/components/mdx/TableHead.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-9
+src/mdx-components.tsx
+  s_ec90214de543d9::t_cf63924ea43db0 1-9
+src/components/mdx/H3.tsx
+  s_51ddad70931461::t_0435e929a97d11 5-6
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 11
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-10,12-15
+src/components/mdx/Paragraph.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7,12-15
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 8-11
+package.json
+  s_51ddad70931461::t_559fdf88b2f016 17
+  s_51ddad70931461::t_ef37379bf8646d 40
+src/app/robots.ts
+  s_0f5b5e747d8b6b::t_c27dc4cb895c32 1-13
+src/components/mdx/MdxImage.tsx
+  s_51ddad70931461::t_3285f01234e9f9 6,8-9,12-23,27-28,30,35,44,48-49,51-55,58-62
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 39,56
+  s_51ddad70931461::t_dc18be461b61d3 34,57
+  s_51ddad70931461::t_c5e7aab4a3bd38 50
+  s_51ddad70931461::t_f61a480ce50975 1-5,7,10-11,24-26,29,31-33,36-38,40-43,45-47,63-64
+src/app/not-found.tsx
+  s_0f5b5e747d8b6b::t_cae257265d2569 5-9
+  s_09b006f8ec4d1b::t_4dc343e60cd3bd 1-4,10-23
+src/components/mdx/H6.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-19
+  s_51ddad70931461::t_0435e929a97d11 5-6
+src/app/page.tsx
+  s_0f5b5e747d8b6b::t_c27dc4cb895c32 37-43
+  s_0f5b5e747d8b6b::t_b7f46ace2e6696 8
+  s_37f127e2a359e2::t_ce5128752ed217 1,29
+  s_d2ab344d489663::t_d299592607e52e 28,30
+  s_0f5b5e747d8b6b::t_66b2aadd297c7a 4-7,9-10,14-16,18,21,36,56,65,67,70-71,86
+  s_37f127e2a359e2::t_519ee931907fd6 32-35
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 17
+  s_37f127e2a359e2::t_5e0b490a4b6a28 19-20,22-24,27,53,58-64,66,68-69,72-85
+  s_37f127e2a359e2::t_dc1c8a6f45748c 2
+src/components/mdx/index.tsx
+  s_51ddad70931461::t_3285f01234e9f9 1-29
+src/components/mdx/UnorderedList.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+src/components/mdx/Emphasis.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/app/rss.xml/route.ts
+  s_5e7870672840d7::t_77866fef3f6dcb 56,58
+  s_5e7870672840d7::t_de6369fc80beeb 6-8
+  s_51ddad70931461::t_15966d757c0c1f 13
+  s_51ddad70931461::t_ddc0cb4d2e6601 1-5,9-12,14-17,21-22,25-26,32-35,37-55,57,59-61
+src/components/mdx/mdxComponents.ts
+  s_51ddad70931461::t_f61a480ce50975 1-55
+src/components/mdx/TableHeader.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+src/components/mdx/Strong.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/components/mdx/TableCell.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/app/blog/[slug]/layout.tsx
+  s_d5fe1a9e23a868::t_c1d8b3ab9db188 3-43
+src/components/mdx/TableBody.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-7
+src/components/Link.tsx
+  s_0f5b5e747d8b6b::t_0c9c632b34a371 2,14-15
+  s_0f5b5e747d8b6b::t_f005f8bb510895 10-11,18-25,35
+  s_0f5b5e747d8b6b::t_7ba36240ed4721 17,33-34
+src/components/mdx/Table.tsx
+  s_0f5b5e747d8b6b::t_7cb27d77314f03 7
+  s_51ddad70931461::t_f61a480ce50975 1-6,8-11
+src/components/mdx/H1.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-4,7-10,12-15
+  s_51ddad70931461::t_0435e929a97d11 5-6
+  s_0f5b5e747d8b6b::t_0b8024c88c40e5 11
+src/components/SubscribeForm.tsx
+  s_37f127e2a359e2::t_af1db1a72efc32 36
+  s_37f127e2a359e2::t_f7e8cbc5770b36 60-61,68
+  s_3ed1da5ee2255b::t_c4bef8f3fc9a12 4
+  s_3ed1da5ee2255b::t_e8e50450756b57 12-15,22,29,38,41,43,46,69-72
+  s_0f5b5e747d8b6b::t_2e92b041438e28 6,25,30,32,35,40,42,44,49,57,62-65
+  s_37f127e2a359e2::t_b95e3e20fff56f 3,10-11,16,20,23-24,26-28,31,33-34,37,39,45,47-48,50,53-56,58,66-67
+  s_37f127e2a359e2::t_c2ae080637a3a2 19,21,59
+src/components/mdx/Blockquote.tsx
+  s_51ddad70931461::t_f61a480ce50975 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "c10df2b0c832fafe457ff88b0ba1b110ba68c709",
+  "prompts": {},
+  "sessions": {
+    "s_09b006f8ec4d1b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3dd1-605a-7e20-8858-902840906d72",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_0f5b5e747d8b6b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3de0-d060-7fe2-9bdd-17511009239e",
+        "model": "gpt-5.4-mini"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_37f127e2a359e2": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e38bf-43bf-7141-bc8e-77dc0cad9c5c",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_3ed1da5ee2255b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e38c2-d295-7d92-b783-a7f02a2856c3",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_51ddad70931461": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3c6e-89e0-7ea1-88c8-f7a61c6ce34b",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_5e7870672840d7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3df9-7490-7bd1-b2b1-7b1efe4df8b9",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_d2ab344d489663": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e38c2-d2c1-7612-8a43-16e88cdbc4a9",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_d5fe1a9e23a868": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3de1-5abb-7a40-8605-27b7a4d750b1",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_ec90214de543d9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e38c2-d256-7dc1-bc59-6cafdc2d8d8e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    },
+    "s_ff607717dcb263": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e3dc2-ec02-7631-ac7c-27ea4807955e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
