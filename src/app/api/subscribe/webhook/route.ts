@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { env } from "@/env";
 
-const app = new Hono().basePath("/api/subscribe");
+const app = new Hono().basePath("/api/subscribe/webhook");
 
 const resend = new Resend(env.RESEND_API_KEY);
 
@@ -19,7 +19,7 @@ const SvixMetadata = z.object({
 
 type SvixMetadata = z.infer<typeof SvixMetadata>;
 
-app.post("/webhook", validator("header", SvixMetadata), async (c) => {
+app.post("/", validator("header", SvixMetadata), async (c) => {
   const payload = await c.req.text();
   const headers = c.req.valid("header");
 
