@@ -1,0 +1,19 @@
+sentry.server.config.ts
+  ai_agent 3
+src/lib/icloud/index.ts
+  ai_agent 11,154,160,170,191-201,218,221,231,235,244-249,253,287,308,361,379,437,457,475,485,504,516,536,565,567-568,572,577,594,643,703,723,737,740,778,786,811
+src/instrumentation-client.ts
+  ai_agent 6
+sentry.edge.config.ts
+  ai_agent 8
+src/lib/evlog.ts
+  ai_agent 4
+next.config.ts
+  ai_agent 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "d8d61ab48e7d1d3201415270285f906c7ba48b96",
+  "prompts": {}
+}
