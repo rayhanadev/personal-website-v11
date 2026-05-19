@@ -26,7 +26,7 @@ export default async function Page({
     <main
       id="main-content"
       tabIndex={-1}
-      className="mx-auto mt-16 flex w-full max-w-2xl flex-1 flex-col gap-10 px-4 pb-16 focus:outline-none sm:mt-39 sm:gap-12 sm:px-0"
+      className="mx-auto mt-16 flex w-full max-w-2xl flex-1 flex-col gap-10 px-4 pb-8 focus:outline-none sm:mt-39 sm:gap-12 sm:px-0"
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
