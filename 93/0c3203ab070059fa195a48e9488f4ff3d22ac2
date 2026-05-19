@@ -1,0 +1,38 @@
+src/app/page.tsx
+  ai_agent 25,27,38
+  s_3691105712e90c::t_1a4c404cad4b62 1-2,21-23,29-32
+  s_3691105712e90c::t_9120beb7ef3c75 18
+  s_3691105712e90c::t_bde9b223a502bd 6
+  s_3691105712e90c::t_ce4857b6c6e501 16
+  s_3691105712e90c::t_9d3296b570a135 17
+  s_3691105712e90c::t_9ebe541e402aec 19,24,26,28
+  s_3691105712e90c::t_57f1ffad14bd69 7,20
+  s_3691105712e90c::t_81d947132aa8e2 113
+  s_3691105712e90c::t_54c35b57b3e76d 33
+src/app/api/location/route.ts
+  s_3691105712e90c::t_e7193fbe6aa23e 1,3-10,12-32,34-38
+  ai_agent 2,11
+  s_3691105712e90c::t_cdcabc07a5cae3 33
+src/lib/icloud/geolocation.ts
+  s_3691105712e90c::t_90dbef55375ae2 1-2,94,139,148-149
+  s_3691105712e90c::t_13111561a68513 3-85,95,98,112,141,147,150-174
+  s_3691105712e90c::t_2c350948ba4b96 86-93,96-97,99-111,113-138,140,142-146
+src/lib/icloud/index.ts
+  ai_agent 1-929
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "930c3203ab070059fa195a48e9488f4ff3d22ac2",
+  "prompts": {},
+  "sessions": {
+    "s_3691105712e90c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e40f5-bb3d-7430-bd11-c3f7c053ff67",
+        "model": "gpt-5.4-mini"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
