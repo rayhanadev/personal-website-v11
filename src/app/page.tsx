@@ -1,6 +1,10 @@
+import { Result } from "better-result";
+
 import Kaomoji from "@/components/Kaomoji";
 import Link from "@/components/Link";
 import { getPosts } from "@/lib/blog";
+import { fetchCurrentIPhoneLocation } from "@/lib/icloud";
+import { formatCityState } from "@/lib/icloud/geolocation";
 
 const postDateFormatter = new Intl.DateTimeFormat("en", {
   day: "numeric",
@@ -9,12 +13,29 @@ const postDateFormatter = new Intl.DateTimeFormat("en", {
   year: "numeric",
 });
 
-export default function Home() {
+export const revalidate = 21600;
+
+export default async function Home() {
+  const response = await Result.tryPromise(async () => {
+    const { data, success } = await fetchCurrentIPhoneLocation();
+    if (!success) return null;
+
+    return await formatCityState(data.location.latitude, data.location.longitude);
+  });
+
+  const location = response.match({
+    ok: (value: string | null) => value,
+    err: (error: unknown) => {
+      console.error("Failed to fetch iCloud location.", error);
+      return null;
+    },
+  });
+
   return (
     <main
       id="main-content"
       tabIndex={-1}
-      className="mx-auto mt-24 flex w-full max-w-2xl flex-1 flex-col gap-12 px-6 pb-24 focus:outline-none sm:mt-39 sm:px-0 sm:pb-32"
+      className="mx-auto mt-24 flex w-full max-w-2xl flex-1 flex-col gap-12 px-6 pb-12 focus:outline-none sm:mt-39 sm:px-0 sm:pb-16"
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
@@ -82,6 +103,14 @@ export default function Home() {
               ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-row gap-1">
+          <Link href="https://ring.purduehackers.com/prev">&lt;</Link>{" "}
+          <Link href="https://ring.purduehackers.com/">Purdue Hackers</Link>{" "}
+          <Link href="https://ring.purduehackers.com/next">&gt;</Link>
+        </div>
+        {location ? <p>Last Seen: {location}</p> : null}
       </div>
     </main>
   );
