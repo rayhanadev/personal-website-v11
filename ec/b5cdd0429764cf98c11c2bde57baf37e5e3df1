@@ -1,0 +1,9 @@
+src/app/layout.tsx
+  ai_agent 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "ecb5cdd0429764cf98c11c2bde57baf37e5e3df1",
+  "prompts": {}
+}
