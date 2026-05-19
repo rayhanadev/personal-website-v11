@@ -1,0 +1,9 @@
+src/components/Link.tsx
+  ai_agent 20-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "d7b3ee7ebb83c304e0329fab0ce49987d143fab2",
+  "prompts": {}
+}
