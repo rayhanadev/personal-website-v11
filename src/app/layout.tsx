@@ -34,7 +34,7 @@ const APP_URL = env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "");
 const AUTHOR = "Rayhan Noufal Arayilakath";
 const SITE_NAME = "Ray Arayilakath";
 const X_HANDLE = "@rayhanadev";
-const TITLE = `${SITE_NAME} | Software Engineer, Applied AI + Infrastructure`;
+const TITLE = `${SITE_NAME} | Software Engineer, AI + Infrastructure`;
 const DESCRIPTION =
   "Ray is a software engineer, open-source builder, and community leader. He runs Purdue Hackers, works on AI-native developer tools at Million, and has previously worked at Replit, Deel, and early-stage startups.";
 
