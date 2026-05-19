@@ -3,6 +3,8 @@ import type { AnchorHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
+const HOST_WHITELIST = ["ring.purduehackers.com"];
+
 export default function Link({
   href,
   children,
@@ -14,7 +16,9 @@ export default function Link({
   children: ReactNode;
 } & DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
   const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"));
-  const isExternalWebLink = href?.startsWith("http://") || href?.startsWith("https://");
+  const isExternalWebLink =
+    !isInternalLink && HOST_WHITELIST.includes(new URL(href ?? "").hostname);
+
   const linkClassName = cn(
     "cursor-pointer underline decoration-neutral-500 decoration-1 underline-offset-2 transition-[color,text-decoration-color] duration-150 ease-out hover:decoration-inherit focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:outline-none",
     className,
