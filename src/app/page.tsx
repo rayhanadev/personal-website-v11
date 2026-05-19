@@ -104,7 +104,7 @@ export default async function Home() {
           </tbody>
         </table>
       </div>
-      <div className="mt-auto flex flex-row justify-between">
+      <div className="flex flex-row justify-between mt-auto">
         <div className="flex flex-row gap-1">
           <Link href="https://ring.purduehackers.com/prev">&lt;</Link>{" "}
           <Link href="https://ring.purduehackers.com/">Purdue Hackers</Link>{" "}
