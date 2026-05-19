@@ -1,0 +1,9 @@
+src/app/api/location/route.ts
+  ai_agent 6,13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "961f572b878db3f5c43d9294a986677cf0761b00",
+  "prompts": {}
+}
