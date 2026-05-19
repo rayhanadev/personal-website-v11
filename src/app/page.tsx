@@ -1,65 +1,88 @@
-import Image from "next/image";
+import Kaomoji from "@/components/Kaomoji";
+import Link from "@/components/Link";
+import { getPosts } from "@/lib/blog";
+
+const postDateFormatter = new Intl.DateTimeFormat("en", {
+  day: "numeric",
+  month: "short",
+  timeZone: "UTC",
+  year: "numeric",
+});
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="mx-auto mt-24 flex w-full max-w-2xl flex-1 flex-col gap-12 px-6 pb-24 focus:outline-none sm:mt-39 sm:px-0 sm:pb-32"
+    >
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-2">
+          <h1 className="font-display text-5xl text-balance">Ray Arayilakath</h1>
+          <p>
+            <Link href="https://x.com/rayhanadev">@rayhanadev</Link> • Software Engineer, Applied AI
+            + Infrastructure
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="flex w-full flex-col gap-4">
+          <p>
+            Hi, I&apos;m Ray! <Kaomoji />
+          </p>
+          <p className="leading-6 text-pretty">
+            I run{" "}
+            <Link href="https://purduehackers.com" className="group">
+              Purdue Hackers <span className="group-hover:text-amber-300">.߆</span>
+            </Link>
+            , where we’re working hard to make Purdue one of the best places in the world to be a
+            young and ambitious builder. We&apos;re backed by Paul Graham, Mitchell Hashimoto, and a
+            bunch of cool folks whose work I really admire.
+          </p>
+          <p className="leading-6 text-pretty">
+            I also work as a software engineer at <Link href="https://million.dev">Million</Link>,
+            where we&apos;re building the next generation of AI-native developer tools. Before that,
+            I interned at Replit, Deel, and several early-stage startups. I also publish open-source
+            platform and infrastructure tooling on{" "}
+            <Link href="https://github.com/rayhanadev">my GitHub</Link>.
+          </p>
+          <p className="leading-6 text-pretty">
+            I like hard problems, wacky ideas, and meeting cool people. If you&apos;re building
+            something interesting, feel free to{" "}
+            <Link href="mailto:me@rayhanadev.com">shoot me an email</Link> and say hi! :)
+          </p>
         </div>
-      </main>
-    </div>
+      </div>
+      <div className="flex flex-col">
+        <h2 className="mb-1">Posts:</h2>
+        <table className="w-full border-separate border-spacing-x-0 border-spacing-y-1">
+          <tbody>
+            {getPosts()
+              .sort(
+                ({ metadata: { pubDate: a } }, { metadata: { pubDate: b } }) =>
+                  b.valueOf() - a.valueOf(),
+              )
+              .map(({ slug, metadata }) => (
+                <tr key={slug}>
+                  <td className="pr-4 align-baseline whitespace-nowrap tabular-nums">
+                    <time className="text-neutral-700" dateTime={metadata.pubDate.toISOString()}>
+                      {postDateFormatter.format(metadata.pubDate)}
+                    </time>
+                  </td>
+                  <td className="min-w-0 align-baseline">
+                    <p className="break-words">
+                      <Link
+                        href={`/blog/${slug}`}
+                        className={slug.startsWith("_") ? "text-neutral-500" : "text-inherit"}
+                      >
+                        {slug.startsWith("_") && "[Draft] "}
+                        {metadata.title}
+                      </Link>
+                    </p>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </main>
   );
 }

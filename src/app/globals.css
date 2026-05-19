@@ -1,26 +1,95 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "@tailwindcss/forms";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-general-sans);
+  --font-mono: var(--font-commit-mono);
+  --font-display: var(--font-pixel-hackers);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .kaomoji {
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+
+  .kaomoji_face {
+    display: inline-block;
+  }
+
+  .kaomoji_hand {
+    animation: kaomoji-wave 1.15s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    transform-origin: -20% 100%;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kaomoji_hand {
+      animation: none;
+    }
+  }
+
+  @keyframes kaomoji-wave {
+    0% {
+      transform: rotate(-5deg);
+    }
+
+    50% {
+      transform: rotate(12deg);
+    }
+
+    100% {
+      transform: rotate(-5deg);
+    }
+  }
+
+  .scrollbar-override {
+    @media (min-width: 1024px) {
+      scrollbar-gutter: stable;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: rgb(255 255 255 / 0.12);
+  }
+
+  * {
+    scrollbar-color: theme(colors.neutral.700) transparent;
+    scrollbar-width: thin;
+  }
+
+  ::selection {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.fancybox__container {
+  --fancybox-backdrop-bg: rgb(0 0 0 / 0.94);
+  --fancybox-color: #f5f5f5;
+  --f-caption-color: #a3a3a3;
+  --f-button-bg: rgb(10 10 10 / 0.86);
+  --f-button-hover-bg: #171717;
+  --f-button-border: 1px solid rgb(255 255 255 / 0.12);
+  --f-button-border-radius: 6px;
+  --f-button-color: #d4d4d4;
+  --f-button-hover-color: #fff;
+  --f-arrow-bg: rgb(10 10 10 / 0.78);
+  --f-arrow-border-radius: 6px;
+  --f-arrow-color: #d4d4d4;
+  --f-arrow-hover-color: #fff;
+  --f-progressbar-color: #fff;
+  font-family: var(--font-general-sans), sans-serif;
+}
+
+.fancybox__container .f-button {
+  box-sizing: border-box;
+}
+
+.f-caption {
+  font-size: 0.875rem;
 }
