@@ -1,0 +1,13 @@
+src/components/Link.tsx
+  ai_agent 4,7-8,19-25,33
+src/app/blog/[slug]/page.tsx
+  ai_agent 29
+src/app/page.tsx
+  ai_agent 107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "8f514692a59a58c9c681402f5e893a8c8564e3ab",
+  "prompts": {}
+}
