@@ -35,7 +35,6 @@
     "better-auth": "^1.6.11",
     "better-result": "^2.9.2",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.2",
     "evlog": "^2.17.0",
     "feed": "^5.2.1",
