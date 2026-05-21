@@ -19,8 +19,6 @@ export default function Link({
   const isExternalWebLink =
     !isInternalLink && !HOST_WHITELIST.includes(new URL(href ?? "").hostname);
 
-  console.log(href, isInternalLink, isExternalWebLink)
-
   const linkClassName = cn(
     "cursor-pointer underline decoration-neutral-500 decoration-1 underline-offset-2 transition-[color,text-decoration-color] duration-150 ease-out hover:decoration-inherit focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:outline-none",
     className,
