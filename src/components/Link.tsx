@@ -26,7 +26,14 @@ export default function Link({
 
   if (isInternalLink) {
     return (
-      <NextLink href={href} className={linkClassName} rel={rel} target={target} {...props}>
+      <NextLink
+        href={href}
+        className={linkClassName}
+        rel={rel}
+        target={target}
+        scroll={false}
+        {...props}
+      >
         {children}
       </NextLink>
     );
