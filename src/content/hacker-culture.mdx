@@ -1,0 +1,42 @@
+---
+title: Hacker Communities
+description: My experience growing up with hacker communities.
+pubDate: 2025-06-12
+---
+
+import acknowledgements from "@/assets/images/blog/hacker-culture/acknowledgements.png";
+import gameScreenshot from "@/assets/images/blog/hacker-culture/pumpkin-game-v1.png";
+
+From March 2023 to May 2024, I interned at Replit. But before I ever worked there, I was a kid on ReplTalk, Replit’s old online community where people shared projects, asked questions, and helped each other debug weird errors.
+
+At the time, Replit’s mission was everywhere: create the next 10 million developers. They made the editor free for students and educators, built one of the easiest ways to start programming in a browser, gave people a place to share what they made, and even created a bounty system where teenagers could win their first freelance jobs. I remember a lot of people joined Replit because their school was using it for class. It was really cool interacting with so many people my age online, all making little websites, games, bots, and tools together. One of my earliest memories of the platform was a simple point-and-click game I'd made.
+
+The premise was simple: you'd catch pumpkins as they fell across your screen, with the speed slowly increasing over time. I wanted to add a global leaderboard, so I asked ReplTalk what the best way to build one was. Someone told me to learn Node.js. I spent a couple days figuring out this new paradigm (back when we all used CommonJS and `require()`, feels like forever ago). I came back with my new and improved Pumpkin Game v2, got a lot of praise for it, and went to sleep really proud of myself for learning something new.
+
+<Figure
+  src={gameScreenshot}
+  alt="Pumpkin Game v2"
+  caption="A screenshot from the landing page for the game!"
+/>
+
+The next day, I woke up and the leaderboard was filled with impossibly high numbers, random text, and unicorns 🦄. I didn't know what it meant at the time, but I'd been pwned! I checked the comments, and a few regulars pointed out that I hadn't sanitized inputs, so my server accepted basically any value for the leaderboard. I was 13, so I was mostly confused why people would hack my small pumpkin game, but a comment someone left stuck with me:
+
+> you're in a community of hackers, you should expect people to break what you make lol. you should take it as a way to grow and learn, you can do better!
+
+After this, I tried again. I implemented basic username/password auth, sanitized inputs, and added security headers. I crawled through Stack Overflow threads, ReplTalk posts, and documentation. Pumpkin Game v3 (at this point more like Christmas Game haha) was published! It became one of the top posts on the forum for a few weeks, and people were excited to see that I'd improved the security of the game!!! I ended up submitting it to one of the community game jams and winning! I found the project again recently and checked the acknowledgements to find the list of people who helped me improve it.
+
+<Figure
+  src={acknowledgements}
+  alt="Acknowledgements"
+  caption="The people who pushed me to learn more about security and Node.js :)"
+/>
+
+Looking back, this is what made ReplTalk feel different from learning from tutorial videos and bootcamps. Nobody was handing me a curriculum. Nobody told me I had to learn things in a specific order, or that my silly pumpkin game wasn't worth taking seriously. People treated the thing I made like real software, which meant they praised it, broke it, criticized it, and helped me make it better!
+
+That was my first real exposure to hacker culture. Treating how I build with curiosity, playfulness, and a bias toward making things. It was a place where the expectation was not that your work would be perfect, but that you would ship, get humbled, learn quickly, and come back stronger.
+
+A lot of people my age and younger who were in tech were part of this space, and it's really interesting to see how they've grown. When ReplTalk was retired, quite a few of us ended up finding new homes at [Hack Club](https://hackclub.com) (including myself!). Others went on to build their own platforms and communities on the Internet. Some of us are in college now, still building things. I caught up with a few of them recently, and it was really cool reminiscing on our past lives and how those spaces pushed us toward who we are now.
+
+It's really cool how the best parts of hacker culture have always stayed the same: make something weird, put it in front of people, see what breaks, and learn how to make it better. These early communities taught me that building is not something I'd have to wait for permission to do. It's something I can just practice in public, surrounded by people who are also building cool things and cheer me when I ship something awesome and come back stronger.
+
+I'm still really grateful for the people who pushed me early on in my journey :)

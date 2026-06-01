@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
@@ -89,6 +90,13 @@ export default function RootLayout({
       lang="en"
       className={`${pixelHackers.variable} ${commitMono.variable} ${generalSans.variable} scrollbar-override h-full antialiased [color-scheme:dark]`}
     >
+      <head>
+        <Script
+          src="//unpkg.com/react-grab/dist/index.global.js"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="flex min-h-full flex-col overflow-x-clip bg-black font-sans text-white">
         <a
           className="sr-only fixed top-3 left-3 z-50 border border-white/15 bg-black px-3 py-2 text-sm text-white shadow-lg focus:not-sr-only focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"

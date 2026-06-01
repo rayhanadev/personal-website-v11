@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "email:dev": "email dev --dir src/emails",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
     "@fancyapps/ui": "^6.1.14",
@@ -68,6 +69,8 @@
     "oxfmt": "^0.50.0",
     "oxlint": "^1.65.0",
     "oxlint-tsgolint": "^0.22.1",
+    "react-doctor": "^0.2.8",
+    "react-grab": "^0.1.43",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"
   },

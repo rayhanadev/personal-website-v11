@@ -4,6 +4,7 @@ import * as z from "zod";
 export const env = createEnv({
   server: {
     BETTER_AUTH_SECRET: z.string(),
+    CURSOR_API_KEY: z.string().optional(),
     ICLOUD_APPLE_ID: z.string().optional(),
     ICLOUD_DEVICE_NAME: z.string().optional(),
     ICLOUD_PASSWORD: z.string(),
@@ -28,6 +29,7 @@ export const env = createEnv({
   },
   runtimeEnv: {
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    CURSOR_API_KEY: process.env.CURSOR_API_KEY,
     ICLOUD_APPLE_ID: process.env.ICLOUD_APPLE_ID,
     ICLOUD_DEVICE_NAME: process.env.ICLOUD_DEVICE_NAME,
     ICLOUD_PASSWORD: process.env.ICLOUD_PASSWORD,

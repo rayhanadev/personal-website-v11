@@ -3,8 +3,17 @@ import { Result } from "better-result";
 import Kaomoji from "@/components/Kaomoji";
 import Link from "@/components/Link";
 import { getPosts } from "@/lib/blog";
+import { fetchCursorTokensThisMonth } from "@/lib/cursor";
 import { fetchCurrentIPhoneLocation } from "@/lib/icloud";
 import { formatCityState } from "@/lib/icloud/geolocation";
+import { env } from "@/env";
+
+function formatCompactTokens(n: number): string {
+  if (n >= 1_000_000_000) return `${+(n / 1_000_000_000).toPrecision(2)}B`;
+  if (n >= 1_000_000) return `${+(n / 1_000_000).toPrecision(2)}M`;
+  if (n >= 1_000) return `${+(n / 1_000).toPrecision(2)}K`;
+  return String(n);
+}
 
 const postDateFormatter = new Intl.DateTimeFormat("en", {
   day: "numeric",
@@ -30,6 +39,10 @@ export default async function Home() {
       return null;
     },
   });
+
+  const cursorTokens = env.CURSOR_API_KEY
+    ? await fetchCursorTokensThisMonth(env.CURSOR_API_KEY, "ray@million.dev").catch(() => null)
+    : null;
 
   return (
     <main
@@ -104,13 +117,18 @@ export default async function Home() {
           </tbody>
         </table>
       </div>
-      <div className="mt-auto flex flex-row justify-between">
+      <div className="mt-auto flex flex-row items-end justify-between">
         <div className="flex flex-row gap-1">
           <Link href="https://ring.purduehackers.com/prev">&lt;</Link>{" "}
           <Link href="https://ring.purduehackers.com/">Purdue Hackers</Link>{" "}
           <Link href="https://ring.purduehackers.com/next">&gt;</Link>
         </div>
-        {location ? <p>Last Seen: {location}</p> : null}
+        <div className="flex flex-col items-end">
+          {cursorTokens !== null ? (
+            <p>Tokens Burned (30d): {formatCompactTokens(cursorTokens)}</p>
+          ) : null}
+          {location ? <p>Last Seen: {location}</p> : null}
+        </div>
       </div>
     </main>
   );
