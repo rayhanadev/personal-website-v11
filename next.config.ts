@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [new URL("https://github.com/rayhanadev.png")],
   },
+  productionBrowserSourceMaps: true,
   experimental: {
     turbopackFileSystemCacheForDev: true,
     turbopackFileSystemCacheForBuild: true,
@@ -50,6 +51,7 @@ export default withSentryConfig(withMDX(nextConfig), {
   project: env.SENTRY_PROJECT,
   silent: !process.env.CI,
   widenClientFileUpload: true,
+  hideSourceMaps: false,
   tunnelRoute: "/monitoring",
   webpack: {
     automaticVercelMonitors: true,
