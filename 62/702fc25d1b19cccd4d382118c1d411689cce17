@@ -1,0 +1,23 @@
+src/app/page.tsx
+  s_cebfc3be8a706d::t_80d0ee3eee5493 25
+  s_cebfc3be8a706d::t_d9c1cdc45855f5 5
+src/lib/icloud/index.ts
+  s_cebfc3be8a706d::t_8f7270c92a95a3 4,8
+  s_cebfc3be8a706d::t_aebed4281a34e6 826-835
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "62702fc25d1b19cccd4d382118c1d411689cce17",
+  "prompts": {},
+  "sessions": {
+    "s_cebfc3be8a706d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32fe08e1-8228-42bc-8517-1b3232662f67",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
