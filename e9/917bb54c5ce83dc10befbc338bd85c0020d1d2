@@ -1,0 +1,20 @@
+next.config.ts
+  s_38892656fc62f5::t_c1eea26d944809 54
+  s_38892656fc62f5::t_2de8d9a768e8e2 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e9917bb54c5ce83dc10befbc338bd85c0020d1d2",
+  "prompts": {},
+  "sessions": {
+    "s_38892656fc62f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb9e275b-d169-4fb9-8819-cccc2f359599",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
