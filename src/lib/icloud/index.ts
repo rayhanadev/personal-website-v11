@@ -1,9 +1,11 @@
 import { createHash, pbkdf2Sync, randomBytes, randomUUID } from "node:crypto";
 import { request } from "node:https";
 
+import { unstable_cache } from "next/cache";
 import { z } from "zod";
 
 import { env } from "@/env";
+import { formatCityState } from "@/lib/icloud/geolocation";
 
 const AUTH_ENDPOINT = "https://idmsa.apple.com/appleauth/auth";
 const HOME_ENDPOINT = "https://www.icloud.com";
@@ -820,6 +822,16 @@ function parseAppleDate(timestamp: number | string | null | undefined): Date | n
 
   return Number.isNaN(date.getTime()) ? null : date;
 }
+
+async function _fetchLocation(): Promise<string | null> {
+  const { data, success } = await fetchCurrentIPhoneLocation();
+  if (!success) return null;
+  return formatCityState(data.location.latitude, data.location.longitude);
+}
+
+export const fetchLocation = unstable_cache(_fetchLocation, ["icloud-location"], {
+  revalidate: 3600,
+});
 
 function failure(message: string): LocationMetadata {
   return {

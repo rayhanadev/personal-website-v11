@@ -1,11 +1,8 @@
-import { Result } from "better-result";
-
 import Kaomoji from "@/components/Kaomoji";
 import Link from "@/components/Link";
 import { getPosts } from "@/lib/blog";
 import { fetchCursorTokensThisMonth } from "@/lib/cursor";
-import { fetchCurrentIPhoneLocation } from "@/lib/icloud";
-import { formatCityState } from "@/lib/icloud/geolocation";
+import { fetchLocation } from "@/lib/icloud";
 import { env } from "@/env";
 
 function formatCompactTokens(n: number): string {
@@ -25,20 +22,7 @@ const postDateFormatter = new Intl.DateTimeFormat("en", {
 export const revalidate = 21600;
 
 export default async function Home() {
-  const response = await Result.tryPromise(async () => {
-    const { data, success } = await fetchCurrentIPhoneLocation();
-    if (!success) return null;
-
-    return await formatCityState(data.location.latitude, data.location.longitude);
-  });
-
-  const location = response.match({
-    ok: (value: string | null) => value,
-    err: (error: unknown) => {
-      console.error("Failed to fetch iCloud location.", error);
-      return null;
-    },
-  });
+  const location = await fetchLocation().catch(() => null);
 
   const cursorTokens = env.CURSOR_API_KEY
     ? await fetchCursorTokensThisMonth(env.CURSOR_API_KEY, "ray@million.dev").catch(() => null)
