@@ -1,0 +1,35 @@
+src/env.ts
+  s_e981b223bd7f7c::t_7aa0bfcde7dc13 32
+  s_e981b223bd7f7c::t_7f03c230c6891a 7
+src/lib/cursor/index.ts
+  s_e981b223bd7f7c::t_f29f8e3601e090 1-2,4-5,27,51,71-72,77-82
+  s_e981b223bd7f7c::t_c9d1c63d740ac1 3,6-7,9-26,28,30-50,52-58,60-70,73-76
+  s_e981b223bd7f7c::t_6985f6371e76a4 8,29,59
+src/app/page.tsx
+  s_e981b223bd7f7c::t_a2601519484f9f 120
+  s_e981b223bd7f7c::t_043a5f5a96f586 6,9
+  s_e981b223bd7f7c::t_03e0306da48071 128
+  s_e981b223bd7f7c::t_aab675a1379b11 43,45-46
+  s_e981b223bd7f7c::t_359456066f6eb0 11-16
+  s_e981b223bd7f7c::t_5d6a402f0c05b5 126-127,129
+  s_e981b223bd7f7c::t_42f431d4bc5ab5 130
+  s_e981b223bd7f7c::t_288f9d317ecbd8 44
+src/app/layout.tsx
+  s_e981b223bd7f7c::t_8d5af2dfe35b8f 94-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "efbb5aedea6c363187b1b6565c8d0dc55c78306e",
+  "prompts": {},
+  "sessions": {
+    "s_e981b223bd7f7c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "06b3da32-1b47-4e30-ac69-41c8225e95f2",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
