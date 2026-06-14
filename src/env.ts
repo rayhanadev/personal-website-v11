@@ -3,6 +3,7 @@ import * as z from "zod";
 
 export const env = createEnv({
   server: {
+    ANTHROPIC_ADMIN_API_KEY: z.string().optional(),
     BETTER_AUTH_SECRET: z.string(),
     CURSOR_API_KEY: z.string().optional(),
     ICLOUD_APPLE_ID: z.string().optional(),
@@ -28,6 +29,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
   },
   runtimeEnv: {
+    ANTHROPIC_ADMIN_API_KEY: process.env.ANTHROPIC_ADMIN_API_KEY,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     CURSOR_API_KEY: process.env.CURSOR_API_KEY,
     ICLOUD_APPLE_ID: process.env.ICLOUD_APPLE_ID,

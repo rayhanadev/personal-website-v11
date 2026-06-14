@@ -1,6 +1,7 @@
 import Kaomoji from "@/components/Kaomoji";
 import Link from "@/components/Link";
 import { getPosts } from "@/lib/blog";
+import { fetchClaudeTokensThisMonth } from "@/lib/claude";
 import { fetchCursorTokensThisMonth } from "@/lib/cursor";
 import { fetchLocation } from "@/lib/icloud";
 import { env } from "@/env";
@@ -19,14 +20,38 @@ const postDateFormatter = new Intl.DateTimeFormat("en", {
   year: "numeric",
 });
 
+function getCursorTokens(): Promise<number | null> {
+  return env.CURSOR_API_KEY
+    ? fetchCursorTokensThisMonth(env.CURSOR_API_KEY, "ray@million.dev").catch(() => null)
+    : Promise.resolve(null);
+}
+
+function getClaudeTokens(): Promise<number | null> {
+  return env.ANTHROPIC_ADMIN_API_KEY
+    ? fetchClaudeTokensThisMonth(env.ANTHROPIC_ADMIN_API_KEY).catch(() => null)
+    : Promise.resolve(null);
+}
+
+async function fetchHomeData() {
+  // location, cursor tokens, and claude tokens are all fetched concurrently.
+  const [location, cursorTokens, claudeTokens] = await Promise.all([
+    fetchLocation().catch(() => null),
+    getCursorTokens(),
+    getClaudeTokens(),
+  ]);
+
+  const tokensBurned =
+    cursorTokens === null && claudeTokens === null
+      ? null
+      : (cursorTokens ?? 0) + (claudeTokens ?? 0);
+
+  return { location, tokensBurned };
+}
+
 export const revalidate = 21600;
 
 export default async function Home() {
-  const location = await fetchLocation().catch(() => null);
-
-  const cursorTokens = env.CURSOR_API_KEY
-    ? await fetchCursorTokensThisMonth(env.CURSOR_API_KEY, "ray@million.dev").catch(() => null)
-    : null;
+  const { location, tokensBurned } = await fetchHomeData();
 
   return (
     <main
@@ -108,8 +133,8 @@ export default async function Home() {
           <Link href="https://ring.purduehackers.com/next">&gt;</Link>
         </div>
         <div className="flex flex-col items-end">
-          {cursorTokens !== null ? (
-            <p>Tokens Burned (30d): {formatCompactTokens(cursorTokens)}</p>
+          {tokensBurned !== null ? (
+            <p>Tokens Burned (30d): {formatCompactTokens(tokensBurned)}</p>
           ) : null}
           {location ? <p>Last Seen: {location}</p> : null}
         </div>
