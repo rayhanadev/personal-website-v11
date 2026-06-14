@@ -51,7 +51,9 @@ export default withSentryConfig(withMDX(nextConfig), {
   project: env.SENTRY_PROJECT,
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  hideSourceMaps: false,
+  sourcemaps: {
+    deleteSourcemapsAfterUpload: false,
+  },
   tunnelRoute: "/monitoring",
   webpack: {
     automaticVercelMonitors: true,
