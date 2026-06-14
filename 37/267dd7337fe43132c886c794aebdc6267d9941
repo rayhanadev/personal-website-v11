@@ -1,0 +1,19 @@
+next.config.ts
+  s_a8d14b56b720c0::t_c3db9d9505f4e9 54-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "37267dd7337fe43132c886c794aebdc6267d9941",
+  "prompts": {},
+  "sessions": {
+    "s_a8d14b56b720c0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "df9d8010-4757-4ade-b8d7-1da0899e7e54",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Rayhan Noufal Arayilakath <me@rayhanadev.com>"
+    }
+  }
+}
