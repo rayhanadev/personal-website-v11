@@ -26,18 +26,11 @@ function getCursorTokens(): Promise<number | null> {
     : Promise.resolve(null);
 }
 
-function getClaudeTokens(): Promise<number | null> {
-  return env.ANTHROPIC_ADMIN_API_KEY
-    ? fetchClaudeTokensThisMonth(env.ANTHROPIC_ADMIN_API_KEY).catch(() => null)
-    : Promise.resolve(null);
-}
-
 async function fetchHomeData() {
-  // location, cursor tokens, and claude tokens are all fetched concurrently.
   const [location, cursorTokens, claudeTokens] = await Promise.all([
     fetchLocation().catch(() => null),
     getCursorTokens(),
-    getClaudeTokens(),
+    fetchClaudeTokensThisMonth().catch(() => null),
   ]);
 
   const tokensBurned =
