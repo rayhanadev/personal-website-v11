@@ -3,7 +3,7 @@
 
 @theme inline {
   --font-sans: var(--font-general-sans);
-  --font-mono: var(--font-commit-mono);
+  --font-mono: var(--font-ioskeley-mono);
   --font-display: var(--font-pixel-hackers);
 }
 

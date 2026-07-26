@@ -15,15 +15,25 @@ const generalSans = localFont({
   variable: "--font-general-sans",
 });
 
-const commitMono = localFont({
-  src: "../assets/fonts/CommitMono.woff2",
-  variable: "--font-commit-mono",
-  declarations: [
+const ioskeleyMono = localFont({
+  src: [
     {
-      prop: "font-feature-settings",
-      value: "'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss05' on",
+      path: "../assets/fonts/IoskeleyMono-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../assets/fonts/IoskeleyMono-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../assets/fonts/IoskeleyMono-Bold.woff2",
+      weight: "700",
+      style: "normal",
     },
   ],
+  variable: "--font-ioskeley-mono",
 });
 
 const pixelHackers = localFont({
@@ -88,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pixelHackers.variable} ${commitMono.variable} ${generalSans.variable} scrollbar-override h-full antialiased [color-scheme:dark]`}
+      className={`${pixelHackers.variable} ${ioskeleyMono.variable} ${generalSans.variable} scrollbar-override h-full antialiased [color-scheme:dark]`}
     >
       <head>
         <Script
