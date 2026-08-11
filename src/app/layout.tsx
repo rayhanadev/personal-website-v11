@@ -1,9 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 
 import { env } from "@/env";
 

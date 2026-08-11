@@ -9,8 +9,6 @@ import { env } from "@/env";
 
 const app = new Hono().basePath("/api/subscribe/webhook");
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 const SvixMetadata = z.object({
   "svix-id": z.string(),
   "svix-timestamp": z.string(),
@@ -20,6 +18,13 @@ const SvixMetadata = z.object({
 type SvixMetadata = z.infer<typeof SvixMetadata>;
 
 app.post("/", validator("header", SvixMetadata), async (c) => {
+  const { RESEND_API_KEY, RESEND_SEGMENT_ID, RESEND_WEBHOOK_SECRET } = env;
+  if (!RESEND_API_KEY || !RESEND_SEGMENT_ID || !RESEND_WEBHOOK_SECRET) {
+    return c.json({ success: false, message: "Webhook isn't configured." }, 503);
+  }
+
+  const resend = new Resend(RESEND_API_KEY);
+
   const payload = await c.req.text();
   const headers = c.req.valid("header");
 
@@ -35,7 +40,7 @@ app.post("/", validator("header", SvixMetadata), async (c) => {
         timestamp: headers["svix-timestamp"],
         signature: headers["svix-signature"],
       },
-      webhookSecret: env.RESEND_WEBHOOK_SECRET,
+      webhookSecret: RESEND_WEBHOOK_SECRET,
     }),
   );
 
@@ -56,7 +61,7 @@ app.post("/", validator("header", SvixMetadata), async (c) => {
   }
 
   const contacts = await resend.contacts.list({
-    audienceId: env.RESEND_SEGMENT_ID,
+    audienceId: RESEND_SEGMENT_ID,
   });
 
   if (contacts.error) {
@@ -74,7 +79,7 @@ app.post("/", validator("header", SvixMetadata), async (c) => {
 
   const update = await resend.contacts.update({
     id: contact.id,
-    audienceId: env.RESEND_SEGMENT_ID,
+    audienceId: RESEND_SEGMENT_ID,
     unsubscribed: false,
   });
 

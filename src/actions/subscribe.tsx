@@ -18,9 +18,14 @@ const SubscribeFormSchema = z.object({
   ),
 });
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 export async function subscribe(_state: SubscribeFormState, payload: FormData) {
+  const { RESEND_API_KEY, RESEND_SEGMENT_ID } = env;
+  if (!RESEND_API_KEY || !RESEND_SEGMENT_ID) {
+    return { success: false, message: "Subscriptions aren't available right now." };
+  }
+
+  const resend = new Resend(RESEND_API_KEY);
+
   const form = SubscribeFormSchema.safeParse({
     email: payload.get("email"),
   });
@@ -30,7 +35,7 @@ export async function subscribe(_state: SubscribeFormState, payload: FormData) {
   }
 
   const subscribe = await resend.contacts.create({
-    audienceId: env.RESEND_SEGMENT_ID,
+    audienceId: RESEND_SEGMENT_ID,
     email: form.data.email,
     unsubscribed: true,
   });
