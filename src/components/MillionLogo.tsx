@@ -6,7 +6,7 @@ export default function MillionLogo({ className }: { className?: string }) {
       viewBox="0 0 169 119"
       fill="currentColor"
       aria-hidden
-      className={cn("h-[13px] w-[18.5px]", className)}
+      className={cn("h-[13px] w-[18.5px] transition-colors duration-150 ease-out", className)}
     >
       <path
         fillRule="evenodd"

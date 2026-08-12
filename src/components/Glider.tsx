@@ -6,7 +6,7 @@ export default function Glider({ className }: { className?: string }) {
       viewBox="357.5 359.5 1098.5 1099"
       fill="currentColor"
       aria-hidden
-      className={cn("size-[13px]", className)}
+      className={cn("size-[13px] transition-colors duration-150 ease-out", className)}
     >
       <path
         fillRule="evenodd"
