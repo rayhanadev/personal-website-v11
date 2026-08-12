@@ -10,7 +10,8 @@ import Socials from "@/components/Socials";
 import { fetchLocation } from "@/lib/icloud";
 
 async function fetchHomeData() {
-  const location = await fetchLocation().catch(() => null);
+  // const location = await fetchLocation().catch(() => null);
+  const location = "Keller, TX"
 
   return { location };
 }
@@ -103,7 +104,7 @@ export default async function Home() {
                   <Link href={`https://maps.apple.com/?q=${encodeURIComponent(location)}`}>
                     {location}
                   </Link>{" "}
-                  let&apos;s grab coffee or boba!
+                  let&apos;s grab coffee or boba! :)
                 </>
               ) : (
                 <> and say hi! :)</>
