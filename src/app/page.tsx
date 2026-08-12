@@ -95,14 +95,14 @@ export default async function Home() {
             <p className="leading-6.5 text-pretty">
               I like hard problems, new ideas, and talking to cool folks. If you&apos;re working on
               something interesting, feel free to{" "}
-              <Link href="mailto:me@rayhanadev.com">shoot me an email</Link> and say hi! :)
+              <Link href="mailto:me@rayhanadev.com">shoot me an email</Link>
+              {location ? (
+                <> or if you&apos;re near {location} let&apos;s grab coffee or boba!</>
+              ) : (
+                <> and say hi! :)</>
+              )}
             </p>
           </div>
-        </div>
-      </div>
-      <div className="flex flex-row items-end justify-end">
-        <div className="flex flex-col items-end">
-          {location ? <p>Last Seen: {location}</p> : null}
         </div>
       </div>
     </main>
