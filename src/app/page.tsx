@@ -97,7 +97,14 @@ export default async function Home() {
               something interesting, feel free to{" "}
               <Link href="mailto:me@rayhanadev.com">shoot me an email</Link>
               {location ? (
-                <> or if you&apos;re near {location} let&apos;s grab coffee or boba!</>
+                <>
+                  {" "}
+                  or if you&apos;re near{" "}
+                  <Link href={`https://maps.apple.com/?q=${encodeURIComponent(location)}`}>
+                    {location}
+                  </Link>{" "}
+                  let&apos;s grab coffee or boba!
+                </>
               ) : (
                 <> and say hi! :)</>
               )}
