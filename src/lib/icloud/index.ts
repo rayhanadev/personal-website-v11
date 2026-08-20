@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { cacheLife } from "next/cache";
 
 import { env } from "@/env";
 import {
@@ -9,6 +9,8 @@ import {
   type RawFindMyLocation,
 } from "@/lib/icloud/client";
 import { formatCityState } from "@/lib/icloud/geolocation";
+
+const LOCATION_REVALIDATE_SECONDS = 600;
 
 export type LocationMetadata =
   | {
@@ -119,27 +121,6 @@ function parseWebSession(rawSession: string | undefined): ICloudWebSession | und
   return parsed as ICloudWebSession;
 }
 
-/**
- * When the current trust token was minted. Apple expires trust after roughly
- * 30 days and will not renew it without a human entering a 2FA code, so this
- * is what the cron watches.
- */
-export function getSessionMintedAt(): Date | null {
-  let session: ICloudWebSession | undefined;
-  try {
-    session = parseWebSession(env.ICLOUD_WEB_SESSION_JSON);
-  } catch {
-    return null;
-  }
-
-  if (!session?.mintedAt) {
-    return null;
-  }
-
-  const minted = new Date(session.mintedAt);
-  return Number.isNaN(minted.getTime()) ? null : minted;
-}
-
 function selectDevice(devices: RawFindMyDevice[], config: FindMyConfig): RawFindMyDevice | null {
   if (config.deviceName) {
     const targetName = config.deviceName.toLowerCase();
@@ -242,30 +223,23 @@ function parseAppleDate(timestamp: number | string | null | undefined): Date | n
 }
 
 /**
- * Throws rather than returning null on failure: unstable_cache stores whatever
- * resolves, so a returned null would pin the fallback copy in place for the
- * whole revalidate window. Rejections aren't cached, so the next request
- * retries. Callers catch this.
+ * Returns null rather than throwing on failure. The homepage is prerendered, so
+ * a rejection here fails the production build outright — a transient iCloud
+ * error must not be able to do that. The cost is that a failure is cached like
+ * any other result, so the fallback copy sticks for up to the revalidate window
+ * above.
  */
-async function _fetchLocation(): Promise<string> {
-  const { data, message, success } = await fetchCurrentIPhoneLocation();
+export async function fetchLocation(): Promise<string | null> {
+  "use cache";
+  cacheLife({ revalidate: LOCATION_REVALIDATE_SECONDS });
+
+  const { data, success } = await fetchCurrentIPhoneLocation();
   if (!success) {
-    throw new Error(message);
+    return null;
   }
 
-  const city = await formatCityState(data.location.latitude, data.location.longitude);
-  if (!city) {
-    throw new Error("Reverse geocoding did not return a city.");
-  }
-
-  return city;
+  return formatCityState(data.location.latitude, data.location.longitude);
 }
-
-export const LOCATION_REVALIDATE_SECONDS = 600;
-
-export const fetchLocation = unstable_cache(_fetchLocation, ["icloud-location"], {
-  revalidate: LOCATION_REVALIDATE_SECONDS,
-});
 
 function failure(message: string): LocationMetadata {
   return {

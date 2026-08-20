@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { env } from "@/env";
 import { getPostBySlug, getPostSlugs } from "@/lib/blog";
@@ -13,6 +14,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  if (!getPostSlugs().some((entry) => entry.slug === slug)) {
+    notFound();
+  }
+
   const { metadata } = getPostBySlug(slug);
   const baseUrl = env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "");
   const postUrl = `${baseUrl}/blog/${slug}`;
@@ -55,5 +60,3 @@ export default async function Layout({
 export function generateStaticParams() {
   return getPostSlugs();
 }
-
-export const dynamicParams = false;

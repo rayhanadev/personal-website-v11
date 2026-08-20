@@ -15,9 +15,6 @@ async function fetchHomeData() {
   return { location };
 }
 
-// Matches the location cache; Next uses the smaller of the two anyway.
-export const revalidate = 600;
-
 export default async function Home() {
   const { location } = await fetchHomeData();
 

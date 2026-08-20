@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
 import { env } from "@/env";
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   reactCompiler: true,
   redirects: async () => {

@@ -1,9 +1,14 @@
 import type { MetadataRoute } from "next";
+import { cacheLife } from "next/cache";
 
 import { env } from "@/env";
 import { getPostSlugs } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Same as the feed: cached so lastModified doesn't force a dynamic render.
+  "use cache";
+  cacheLife("max");
+
   const slugs = getPostSlugs();
 
   return [
@@ -16,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...slugs.map(
       (s) =>
         ({
-          url: `${env.NEXT_PUBLIC_APP_URL}/blog/${s}`,
+          url: `${env.NEXT_PUBLIC_APP_URL}/blog/${s.slug}`,
           lastModified: new Date(),
           changeFrequency: "weekly",
           priority: 0.8,

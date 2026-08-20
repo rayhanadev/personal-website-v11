@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 import BlogFancybox from "@/components/BlogFancybox";
 import Link from "@/components/Link";
 import SubscribeForm from "@/components/SubscribeForm";
-import { getPostBySlug } from "@/lib/blog";
+import { getPostBySlug, getPostSlugs } from "@/lib/blog";
 
 const postDateFormatter = new Intl.DateTimeFormat("en", {
   day: "numeric",
@@ -18,6 +19,9 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }>) {
   const { slug } = await params;
+  if (!getPostSlugs().some((entry) => entry.slug === slug)) {
+    notFound();
+  }
 
   const { default: Post } = await import(`@/content/${slug}.mdx`);
   const { metadata } = getPostBySlug(slug);

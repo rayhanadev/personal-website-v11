@@ -1,12 +1,17 @@
 import { Feed } from "feed";
+import { cacheLife } from "next/cache";
 
 import { env } from "@/env";
 import { getPosts } from "@/lib/blog";
 
-export const dynamic = "force-static";
-export const revalidate = false;
+// Caches the XML rather than the Response: `use cache` stores the return value,
+// and a Response isn't serializable. The feed only changes when posts do, i.e.
+// on deploy, and caching also keeps the new Date() below from opting the route
+// out of prerendering.
+async function renderFeed(): Promise<string> {
+  "use cache";
+  cacheLife("max");
 
-export function GET() {
   const posts = getPosts()
     .filter(({ slug }) => !slug.startsWith("_"))
     .sort(
@@ -51,7 +56,11 @@ export function GET() {
     });
   }
 
-  return new Response(feed.rss2(), {
+  return feed.rss2();
+}
+
+export async function GET() {
+  return new Response(await renderFeed(), {
     headers: {
       "Cache-Control": "public, max-age=3600",
       "Content-Type": "application/rss+xml; charset=utf-8",
