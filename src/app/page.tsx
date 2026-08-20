@@ -10,13 +10,13 @@ import Socials from "@/components/Socials";
 import { fetchLocation } from "@/lib/icloud";
 
 async function fetchHomeData() {
-  // const location = await fetchLocation().catch(() => null);
-  const location = "Keller, TX"
+  const location = await fetchLocation().catch(() => null);
 
   return { location };
 }
 
-export const revalidate = 21600;
+// Matches the location cache; Next uses the smaller of the two anyway.
+export const revalidate = 600;
 
 export default async function Home() {
   const { location } = await fetchHomeData();
