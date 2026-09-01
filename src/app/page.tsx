@@ -55,7 +55,7 @@ export default async function Home() {
               I also work at{" "}
               <LogoLink
                 href="https://million.dev"
-                width={18.5}
+                width={17.3}
                 mark={<MillionLogo className="group-hover:text-[oklch(58%_0.185_292.4)]" />}
               >
                 Million
